@@ -15,7 +15,7 @@ services:
     tmpfs:
       - /tmp
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8081/health"]
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8081/health"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -32,7 +32,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VUE_APP_API_URL: http://localhost:8081
+       VUE_APP_API_URL: http://89.169.177.117:8081
     image: app-frontend:latest
     depends_on:
       backend:
@@ -48,7 +48,7 @@ services:
       - /var/cache/nginx
       - /var/run
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:8080/"]
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
       interval: 30s
       timeout: 5s
       retries: 3
